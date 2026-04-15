@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
+                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Definicion del Problema (API de Gestion de Franquicias)"
+              "title": "Estructura de la Arquitectura"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
+                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes de Definicion del Problema (API de Gestion de Franquicias)"
+              "title": "Enlaces entrantes de Estructura de la Arquitectura"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
+                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Enlaces salientes de Definicion del Problema (API de Gestion de Franquicias)"
+              "title": "Enlaces salientes de Estructura de la Arquitectura"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
+                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de Definicion del Problema (API de Gestion de Franquicias)"
+              "title": "Esquema de Estructura de la Arquitectura"
             }
           }
         ]
@@ -185,17 +185,24 @@
   },
   "active": "1575b0b551a19306",
   "lastOpenFiles": [
+    "Accenture/src/main/java/com/Prueba/Accenture/shared/infrastructure",
+    "Accenture/src/main/java/com/Prueba/Accenture/shared/application",
+    "Accenture/src/main/java/com/Prueba/Accenture/shared/interfaces",
+    "Accenture/src/main/java/com/Prueba/Accenture/report/infrastructure",
+    "Accenture/src/main/java/com/Prueba/Accenture/report/application",
+    "Accenture/src/main/java/com/Prueba/Accenture/report/interfaces",
+    "Accenture/src/main/java/com/Prueba/Accenture/product/infrastructure",
+    "Accenture/src/main/java/com/Prueba/Accenture/product/application",
+    "Accenture/src/main/java/com/Prueba/Accenture/product/interfaces",
+    "Accenture/src/main/java/com/Prueba/Accenture/franchise/infrastructure",
+    "Accenture/src/main/java/com/Prueba/Accenture/franchise/application",
+    "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
+    "Accenture/HELP.md",
     "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
     "Documentacion/Arquitectura/Componentes.md",
     "Documentacion/Arquitectura/Justificacion de la arquitectura.md",
     "Documentacion/Base de datos/modelo relacional.md",
-    "Documentacion/img_doc",
     "Documentacion/img_doc/Pasted image 20260414194743.png",
-    "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
-    "Documentacion/Arquitectura/Componentes",
-    "Documentacion/Sin título.md",
-    "Documentacion/Arquitectura",
-    "Documentacion/Base de datos",
-    "Documentacion"
+    "Documentacion/Sin título.md"
   ]
 }
