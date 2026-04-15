@@ -2,6 +2,7 @@ package com.Prueba.Accenture.franchise.application;
 
 import com.Prueba.Accenture.franchise.domain.Franchise;
 import com.Prueba.Accenture.franchise.domain.FranchiseRepository;
+import com.Prueba.Accenture.shared.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,7 +18,9 @@ public class FranchiseService {
 
     // CREATE
     public Mono<Franchise> create(String name) {
-        Franchise franchise = new Franchise(null, name);
+
+        Franchise franchise = new Franchise();
+        franchise.rename(name);
         return repository.save(franchise);
     }
 
@@ -35,7 +38,7 @@ public class FranchiseService {
     public Mono<Franchise> updateName(Long id, String newName) {
 
         return repository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Franchise not found")))
+                .switchIfEmpty(Mono.error(new NotFoundException("Franchise not found")))
                 .flatMap(franchise -> {
                     franchise.rename(newName);
                     return repository.save(franchise);

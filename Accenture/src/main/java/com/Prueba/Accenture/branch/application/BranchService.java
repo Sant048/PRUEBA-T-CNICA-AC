@@ -2,6 +2,7 @@ package com.Prueba.Accenture.branch.application;
 
 import com.Prueba.Accenture.branch.domain.Branch;
 import com.Prueba.Accenture.branch.domain.BranchRepository;
+import com.Prueba.Accenture.shared.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -54,7 +55,7 @@ public class BranchService {
     public Mono<Branch> updateName(Long id, String newName) {
 
         return repository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Branch not found")))
+                .switchIfEmpty(Mono.error(new NotFoundException("Branch not found")))
                 .flatMap(branch -> {
                     branch.rename(newName);
                     return repository.save(branch);
@@ -75,7 +76,7 @@ public class BranchService {
     public Mono<Branch> changeFranchise(Long id, Long franchiseId) {
 
         return repository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Branch not found")))
+                .switchIfEmpty(Mono.error(new NotFoundException("Branch not found")))
                 .flatMap(branch -> {
                     branch.assignToFranchise(franchiseId);
                     return repository.save(branch);
