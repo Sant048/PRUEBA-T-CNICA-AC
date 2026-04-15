@@ -1,5 +1,8 @@
 package com.Prueba.Accenture.branch.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Branch {
 
     private Long id;
@@ -21,15 +24,10 @@ public class Branch {
         this.name = newName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getFranchiseId() {
-        return franchiseId;
+    public void assignToFranchise(Long franchiseId) {
+        if (franchiseId == null) {
+            throw new IllegalArgumentException("FranchiseId cannot be null");
+        }
+        this.franchiseId = franchiseId;
     }
 }

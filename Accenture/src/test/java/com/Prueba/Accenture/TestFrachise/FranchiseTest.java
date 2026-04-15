@@ -10,9 +10,7 @@ class FranchiseTest {
     @Test
     void shouldRenameSuccessfully() {
         Franchise franchise = new Franchise(1L, "Old Name");
-
         franchise.rename("New Name");
-
         assertEquals("New Name", franchise.getName());
     }
 

@@ -1,35 +1,27 @@
 package com.Prueba.Accenture.product.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Product {
 
     private Long id;
     private String name;
-    private int stock;
+    private Integer stock;
     private Long branchId;
 
     public Product() {}
 
-    public Product(Long id, String name, int stock, Long branchId) {
+    public Product(Long id, String name, Integer stock, Long branchId) {
         this.id = id;
         this.name = name;
         this.stock = stock;
         this.branchId = branchId;
     }
 
-    public void increaseStock(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Amount must be > 0");
-        }
-        this.stock += amount;
-    }
-
-    public void decreaseStock(int amount) {
-        if (amount <= 0 || amount > this.stock) {
-            throw new IllegalArgumentException("Invalid stock decrease");
-        }
-        this.stock -= amount;
-    }
-
+    // =========================
+    // DOMAIN LOGIC
+    // =========================
     public void rename(String newName) {
         if (newName == null || newName.isBlank()) {
             throw new IllegalArgumentException("Product name cannot be empty");
@@ -37,19 +29,17 @@ public class Product {
         this.name = newName;
     }
 
-    public Long getId() {
-        return id;
+    public void updateStock(Integer newStock) {
+        if (newStock == null || newStock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+        this.stock = newStock;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public Long getBranchId() {
-        return branchId;
+    public void assignToBranch(Long branchId) {
+        if (branchId == null) {
+            throw new IllegalArgumentException("BranchId cannot be null");
+        }
+        this.branchId = branchId;
     }
 }
