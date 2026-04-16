@@ -3,6 +3,8 @@ package com.Prueba.Accenture.franchise.interfaces;
 import com.Prueba.Accenture.franchise.application.FranchiseService;
 import com.Prueba.Accenture.franchise.domain.Franchise;
 import com.Prueba.Accenture.franchise.interfaces.dto.FranchiseRequest;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,7 +23,7 @@ public class FranchiseController {
     // CREATE
     // =========================
     @PostMapping
-    public Mono<Franchise> create(@RequestBody FranchiseRequest request) {
+    public Mono<Franchise> create(@Valid @RequestBody FranchiseRequest request) {
         return service.create(request.getName());
     }
 
@@ -47,7 +49,7 @@ public class FranchiseController {
     @PutMapping("/{id}")
     public Mono<Franchise> updateName(
             @PathVariable Long id,
-            @RequestBody FranchiseRequest request
+            @Valid @RequestBody FranchiseRequest request
     ) {
         return service.updateName(id, request.getName());
     }
@@ -56,6 +58,7 @@ public class FranchiseController {
     // DELETE
     // =========================
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> delete(@PathVariable Long id) {
         return service.delete(id);
     }

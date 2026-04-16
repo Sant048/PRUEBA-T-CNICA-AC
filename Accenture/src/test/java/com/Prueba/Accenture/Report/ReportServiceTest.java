@@ -14,17 +14,19 @@ class ReportServiceTest {
     private final ReportService service = new ReportService(repository);
 
     @Test
-    void shouldReturnTopProductsByBranch() {
+    void shouldReturnTopProductsByFranchise() {
 
-        Mockito.when(repository.findTopProductsByBranch())
+        Long franchiseId = 1L;
+
+        Mockito.when(repository.findTopProductsByFranchise(franchiseId))
                 .thenReturn(Flux.just(
                         new TopProduct(1L, 10L, "Laptop", 50),
                         new TopProduct(2L, 20L, "Mouse", 30)
                 ));
 
-        StepVerifier.create(service.getTopProductsByBranch())
-                .expectNextMatches(p -> p.getBranchId().equals(1L))
-                .expectNextMatches(p -> p.getBranchId().equals(2L))
+        StepVerifier.create(service.getTopProductsByFranchise(franchiseId))
+                .expectNextMatches(p -> p.getBranchId().equals(1L) && p.getStock() == 50)
+                .expectNextMatches(p -> p.getBranchId().equals(2L) && p.getStock() == 30)
                 .verifyComplete();
     }
 }

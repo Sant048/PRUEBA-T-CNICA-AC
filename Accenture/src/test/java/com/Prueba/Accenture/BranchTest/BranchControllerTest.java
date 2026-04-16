@@ -19,7 +19,6 @@ class BranchControllerTest {
 
     @BeforeEach
     void setup() {
-
         service = Mockito.mock(BranchService.class);
         BranchController controller = new BranchController(service);
 
@@ -41,7 +40,7 @@ class BranchControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isOk()   // ✅ cambiado
                 .expectBody()
                 .jsonPath("$.name").isEqualTo("Branch A");
     }
@@ -81,14 +80,12 @@ class BranchControllerTest {
     void shouldGetByFranchise() {
 
         Mockito.when(service.findByFranchise(1L))
-                .thenReturn(Flux.just(
-                        new Branch(1L, "A", 1L)
-                ));
+                .thenReturn(Flux.just(new Branch(1L, "A", 1L)));
 
         client.get()
-                .uri("/branches/franchise/1")
+                .uri("/branches?franchiseId=1")  // ✅ corregido
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isOk()           // ✅ corregido
                 .expectBody()
                 .jsonPath("$.length()").isEqualTo(1);
     }
@@ -138,6 +135,6 @@ class BranchControllerTest {
         client.delete()
                 .uri("/branches/1")
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus().isOk(); // 🔥 ahora coincide con tu controller
     }
 }

@@ -2,6 +2,8 @@ package com.Prueba.Accenture.product.interfaces;
 
 import com.Prueba.Accenture.product.application.ProductService;
 import com.Prueba.Accenture.product.domain.Product;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,11 +18,10 @@ public class ProductController {
         this.service = service;
     }
 
-    // =========================
     // CREATE
-    // =========================
     @PostMapping
-    public Mono<Product> create(@RequestBody ProductRequest request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<Product> create(@Valid @RequestBody ProductRequest request) {
         return service.create(
                 request.getName(),
                 request.getStock(),
@@ -28,9 +29,7 @@ public class ProductController {
         );
     }
 
-    // =========================
     // GET
-    // =========================
     @GetMapping("/{id}")
     public Mono<Product> getById(@PathVariable Long id) {
         return service.findById(id);
@@ -46,43 +45,30 @@ public class ProductController {
         return service.findByBranch(branchId);
     }
 
-    // =========================
     // UPDATE NAME
-    // =========================
     @PutMapping("/{id}")
-    public Mono<Product> updateName(
-            @PathVariable Long id,
-            @RequestBody ProductRequest request
-    ) {
+    public Mono<Product> updateName(@PathVariable Long id,
+                                    @Valid @RequestBody ProductRequest request) {
         return service.updateName(id, request.getName());
     }
 
-    // =========================
     // UPDATE STOCK
-    // =========================
     @PutMapping("/{id}/stock")
-    public Mono<Product> updateStock(
-            @PathVariable Long id,
-            @RequestBody ProductRequest request
-    ) {
+    public Mono<Product> updateStock(@PathVariable Long id,
+                                     @Valid @RequestBody ProductRequest request) {
         return service.updateStock(id, request.getStock());
     }
 
-    // =========================
     // CHANGE BRANCH
-    // =========================
     @PutMapping("/{id}/branch")
-    public Mono<Product> changeBranch(
-            @PathVariable Long id,
-            @RequestBody ProductRequest request
-    ) {
+    public Mono<Product> changeBranch(@PathVariable Long id,
+                                      @Valid @RequestBody ProductRequest request) {
         return service.changeBranch(id, request.getBranchId());
     }
 
-    // =========================
     // DELETE
-    // =========================
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> delete(@PathVariable Long id) {
         return service.delete(id);
     }

@@ -14,7 +14,13 @@ public class ReportService {
         this.repository = repository;
     }
 
-    public Flux<TopProduct> getTopProductsByBranch() {
-        return repository.findTopProductsByBranch();
+    public Flux<TopProduct> getTopProductsByFranchise(Long franchiseId) {
+        return repository.findTopProductsByFranchise(franchiseId)
+                .groupBy(TopProduct::getBranchId)
+                .flatMap(group ->
+                        group.reduce((a, b) ->
+                                a.getStock() >= b.getStock() ? a : b
+                        )
+                );
     }
 }

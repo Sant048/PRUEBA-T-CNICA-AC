@@ -17,38 +17,49 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     // =========================
-    // SAVE
+    // SAVE (INSERT / UPDATE)
     // =========================
     @Override
     public Mono<Product> save(Product product) {
 
         if (product.getId() == null) {
-            // INSERT
+
             return client.sql("""
-                    INSERT INTO product (name, stock, branch_id)
-                    VALUES (:name, :stock, :branchId)
-                    """)
+                INSERT INTO product (name, stock, branch_id)
+                VALUES (:name, :stock, :branchId)
+            """)
                     .bind("name", product.getName())
                     .bind("stock", product.getStock())
                     .bind("branchId", product.getBranchId())
                     .fetch()
                     .rowsUpdated()
-                    .flatMap(rows -> findLastInserted());
-        } else {
-            // UPDATE
-            return client.sql("""
-                    UPDATE product 
-                    SET name = :name, stock = :stock, branch_id = :branchId
-                    WHERE id = :id
-                    """)
-                    .bind("id", product.getId())
-                    .bind("name", product.getName())
-                    .bind("stock", product.getStock())
-                    .bind("branchId", product.getBranchId())
-                    .fetch()
-                    .rowsUpdated()
-                    .thenReturn(product);
+                    .flatMap(rows -> {
+                        if (rows <= 0) {
+                            return Mono.error(new RuntimeException("Insert failed"));
+                        }
+                        return findByUnique(product.getName(), product.getBranchId());
+                    });
         }
+
+        return client.sql("""
+            UPDATE product 
+            SET name = :name,
+                stock = :stock,
+                branch_id = :branchId
+            WHERE id = :id
+        """)
+                .bind("id", product.getId())
+                .bind("name", product.getName())
+                .bind("stock", product.getStock())
+                .bind("branchId", product.getBranchId())
+                .fetch()
+                .rowsUpdated()
+                .flatMap(rows -> {
+                    if (rows == 0) {
+                        return Mono.error(new RuntimeException("Product not found: " + product.getId()));
+                    }
+                    return findById(product.getId());
+                });
     }
 
     // =========================
@@ -58,15 +69,15 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Mono<Product> findById(Long id) {
 
         return client.sql("""
-                SELECT id, name, stock, branch_id 
-                FROM product 
-                WHERE id = :id
-                """)
+            SELECT id, name, stock, branch_id 
+            FROM product 
+            WHERE id = :id
+        """)
                 .bind("id", id)
                 .map((row, meta) -> new Product(
                         row.get("id", Long.class),
                         row.get("name", String.class),
-                        row.get("stock", Integer.class),
+                        safeInt(row.get("stock")),
                         row.get("branch_id", Long.class)
                 ))
                 .one();
@@ -79,13 +90,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Flux<Product> findAll() {
 
         return client.sql("""
-                SELECT id, name, stock, branch_id 
-                FROM product
-                """)
+            SELECT id, name, stock, branch_id 
+            FROM product
+        """)
                 .map((row, meta) -> new Product(
                         row.get("id", Long.class),
                         row.get("name", String.class),
-                        row.get("stock", Integer.class),
+                        safeInt(row.get("stock")),
                         row.get("branch_id", Long.class)
                 ))
                 .all();
@@ -98,50 +109,67 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Flux<Product> findByBranchId(Long branchId) {
 
         return client.sql("""
-                SELECT id, name, stock, branch_id 
-                FROM product 
-                WHERE branch_id = :branchId
-                """)
+            SELECT id, name, stock, branch_id 
+            FROM product 
+            WHERE branch_id = :branchId
+        """)
                 .bind("branchId", branchId)
                 .map((row, meta) -> new Product(
                         row.get("id", Long.class),
                         row.get("name", String.class),
-                        row.get("stock", Integer.class),
+                        safeInt(row.get("stock")),
                         row.get("branch_id", Long.class)
                 ))
                 .all();
     }
 
     // =========================
-    // DELETE
+    // DELETE (FIXED)
     // =========================
     @Override
     public Mono<Void> deleteById(Long id) {
 
         return client.sql("""
-                DELETE FROM product WHERE id = :id
-                """)
+            DELETE FROM product 
+            WHERE id = :id
+        """)
                 .bind("id", id)
                 .fetch()
                 .rowsUpdated()
-                .then();
+                .flatMap(rows -> {
+                    if (rows == 0) {
+                        return Mono.error(new RuntimeException("Product not found: " + id));
+                    }
+                    return Mono.empty();
+                });
     }
 
     // =========================
-    // SAFE FETCH LAST INSERT
+    // SAFE HELPERS
     // =========================
-    private Mono<Product> findLastInserted() {
+
+    private Integer safeInt(Object value) {
+        if (value == null) return 0;
+        return ((Number) value).intValue();
+    }
+
+    // 🔥 FIX IMPORTANTE: evita "last inserted bug"
+    private Mono<Product> findByUnique(String name, Long branchId) {
 
         return client.sql("""
-                SELECT id, name, stock, branch_id 
-                FROM product 
-                ORDER BY id DESC 
-                LIMIT 1
-                """)
+            SELECT id, name, stock, branch_id 
+            FROM product
+            WHERE name = :name
+            AND branch_id = :branchId
+            ORDER BY id DESC
+            LIMIT 1
+        """)
+                .bind("name", name)
+                .bind("branchId", branchId)
                 .map((row, meta) -> new Product(
                         row.get("id", Long.class),
                         row.get("name", String.class),
-                        row.get("stock", Integer.class),
+                        safeInt(row.get("stock")),
                         row.get("branch_id", Long.class)
                 ))
                 .one();

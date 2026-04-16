@@ -2,7 +2,6 @@ package com.Prueba.Accenture.franchise.infrastructure;
 
 import com.Prueba.Accenture.franchise.domain.Franchise;
 import com.Prueba.Accenture.franchise.domain.FranchiseRepository;
-import com.Prueba.Accenture.franchise.infrastructure.Mapper.FranchiseMapper;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
@@ -18,16 +17,47 @@ public class FranchiseRepositoryImpl implements FranchiseRepository {
     }
 
     // =========================
-    // SAVE
+    // SAVE (INSERT / UPDATE)
     // =========================
     @Override
-    public Mono<Franchise> save(Franchise franchise) {
+    public Mono<Franchise> save(Franchise f) {
 
-        return client.sql("INSERT INTO franchise (name) VALUES (:name)")
-                .bind("name", franchise.getName())
+        if (f.getId() == null) {
+            return client.sql("""
+                    INSERT INTO franchise (name)
+                    VALUES (:name)
+                """)
+                    .bind("name", f.getName())
+                    .fetch()
+                    .rowsUpdated()
+                    .then(
+                            client.sql("SELECT id, name FROM franchise WHERE id = LAST_INSERT_ID()")
+                                    .map((row, meta) -> new Franchise(
+                                            row.get("id", Long.class),
+                                            row.get("name", String.class)
+                                    ))
+                                    .one()
+                    );
+        }
+
+        return client.sql("""
+                UPDATE franchise 
+                SET name = :name 
+                WHERE id = :id
+            """)
+                .bind("name", f.getName())
+                .bind("id", f.getId())
                 .fetch()
                 .rowsUpdated()
-                .flatMap(rows -> franchiseAfterInsert());
+                .then(
+                        client.sql("SELECT id, name FROM franchise WHERE id = :id")
+                                .bind("id", f.getId())
+                                .map((row, meta) -> new Franchise(
+                                        row.get("id", Long.class),
+                                        row.get("name", String.class)
+                                ))
+                                .one()
+                );
     }
 
     // =========================
@@ -38,14 +68,10 @@ public class FranchiseRepositoryImpl implements FranchiseRepository {
 
         return client.sql("SELECT id, name FROM franchise WHERE id = :id")
                 .bind("id", id)
-                .map((row, meta) ->
-                        FranchiseMapper.toDomain(
-                                new FranchiseEntity(
-                                        row.get("id", Long.class),
-                                        row.get("name", String.class)
-                                )
-                        )
-                )
+                .map((row, meta) -> new Franchise(
+                        row.get("id", Long.class),
+                        row.get("name", String.class)
+                ))
                 .one();
     }
 
@@ -56,14 +82,10 @@ public class FranchiseRepositoryImpl implements FranchiseRepository {
     public Flux<Franchise> findAll() {
 
         return client.sql("SELECT id, name FROM franchise")
-                .map((row, meta) ->
-                        FranchiseMapper.toDomain(
-                                new FranchiseEntity(
-                                        row.get("id", Long.class),
-                                        row.get("name", String.class)
-                                )
-                        )
-                )
+                .map((row, meta) -> new Franchise(
+                        row.get("id", Long.class),
+                        row.get("name", String.class)
+                ))
                 .all();
     }
 
@@ -78,22 +100,5 @@ public class FranchiseRepositoryImpl implements FranchiseRepository {
                 .fetch()
                 .rowsUpdated()
                 .then();
-    }
-
-    // =========================
-    // SAFE INSERT FETCH
-    // =========================
-    private Mono<Franchise> franchiseAfterInsert() {
-
-        return client.sql("SELECT id, name FROM franchise ORDER BY id DESC LIMIT 1")
-                .map((row, meta) ->
-                        FranchiseMapper.toDomain(
-                                new FranchiseEntity(
-                                        row.get("id", Long.class),
-                                        row.get("name", String.class)
-                                )
-                        )
-                )
-                .one();
     }
 }

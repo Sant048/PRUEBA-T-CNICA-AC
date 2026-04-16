@@ -79,7 +79,14 @@ class FranchiseServiceTest {
 
     @Test
     void shouldDeleteFranchise() {
-        when(repository.deleteById(1L)).thenReturn(Mono.empty());
+
+        Franchise franchise = new Franchise(1L, "Nike");
+
+        when(repository.findById(1L))
+                .thenReturn(Mono.just(franchise));
+
+        when(repository.deleteById(1L))
+                .thenReturn(Mono.empty());
 
         service.delete(1L).block();
 

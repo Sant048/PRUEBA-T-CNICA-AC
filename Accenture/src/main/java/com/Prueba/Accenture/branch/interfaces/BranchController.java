@@ -3,6 +3,8 @@ package com.Prueba.Accenture.branch.interfaces;
 import com.Prueba.Accenture.branch.application.BranchService;
 import com.Prueba.Accenture.branch.domain.Branch;
 import com.Prueba.Accenture.branch.interfaces.dto.BranchRequest;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,7 +23,7 @@ public class BranchController {
     // CREATE
     // =========================
     @PostMapping
-    public Mono<Branch> create(@RequestBody BranchRequest request) {
+    public Mono<Branch> create(@Valid @RequestBody BranchRequest request) {
         return service.create(
                 request.getName(),
                 request.getFranchiseId()
@@ -36,20 +38,12 @@ public class BranchController {
         return service.findById(id);
     }
 
-    // =========================
-    // GET ALL
-    // =========================
     @GetMapping
-    public Flux<Branch> getAll() {
+    public Flux<Branch> getAll(@RequestParam(required = false) Long franchiseId) {
+        if (franchiseId != null) {
+            return service.findByFranchise(franchiseId);
+        }
         return service.findAll();
-    }
-
-    // =========================
-    // GET BY FRANCHISE
-    // =========================
-    @GetMapping("/franchise/{franchiseId}")
-    public Flux<Branch> getByFranchise(@PathVariable Long franchiseId) {
-        return service.findByFranchise(franchiseId);
     }
 
     // =========================
@@ -58,26 +52,16 @@ public class BranchController {
     @PutMapping("/{id}")
     public Mono<Branch> updateName(
             @PathVariable Long id,
-            @RequestBody BranchRequest request
+            @Valid @RequestBody BranchRequest request
     ) {
         return service.updateName(id, request.getName());
-    }
-
-    // =========================
-    // CHANGE FRANCHISE
-    // =========================
-    @PutMapping("/{id}/franchise")
-    public Mono<Branch> changeFranchise(
-            @PathVariable Long id,
-            @RequestBody BranchRequest request
-    ) {
-        return service.changeFranchise(id, request.getFranchiseId());
     }
 
     // =========================
     // DELETE
     // =========================
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> delete(@PathVariable Long id) {
         return service.delete(id);
     }

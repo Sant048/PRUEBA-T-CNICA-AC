@@ -15,8 +15,8 @@ public class ReportController {
         this.service = service;
     }
 
-    @GetMapping("/top-products")
-    public Flux<TopProduct> getTopProducts() {
-        return service.getTopProductsByBranch();
+    @GetMapping("/top-products/franchise/{franchiseId}")
+    public Flux<TopProduct> getTopProductsByFranchise(@PathVariable Long franchiseId) {
+        return service.getTopProductsByFranchise(franchiseId);
     }
 }

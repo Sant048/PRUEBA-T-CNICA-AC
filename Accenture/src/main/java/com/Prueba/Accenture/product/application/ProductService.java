@@ -16,11 +16,8 @@ public class ProductService {
         this.repository = repository;
     }
 
-    // =========================
-    // CREATE PRODUCT
-    // =========================
+    // CREATE
     public Mono<Product> create(String name, Integer stock, Long branchId) {
-
         Product product = new Product();
         product.rename(name);
         product.updateStock(stock);
@@ -29,11 +26,10 @@ public class ProductService {
         return repository.save(product);
     }
 
-    // =========================
-    // FIND
-    // =========================
+    // FIND BY ID (FIX IMPORTANTE)
     public Mono<Product> findById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(new NotFoundException("Product not found")));
     }
 
     public Flux<Product> findAll() {
@@ -44,49 +40,36 @@ public class ProductService {
         return repository.findByBranchId(branchId);
     }
 
-    // =========================
     // UPDATE NAME
-    // =========================
     public Mono<Product> updateName(Long id, String name) {
-
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(new NotFoundException("Product not found")))
+        return findById(id)
                 .flatMap(product -> {
                     product.rename(name);
                     return repository.save(product);
                 });
     }
 
-    // =========================
     // UPDATE STOCK
-    // =========================
     public Mono<Product> updateStock(Long id, Integer stock) {
-
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(new NotFoundException("Product not found")))
+        return findById(id)
                 .flatMap(product -> {
                     product.updateStock(stock);
                     return repository.save(product);
                 });
     }
 
-    // =========================
     // CHANGE BRANCH
-    // =========================
     public Mono<Product> changeBranch(Long id, Long branchId) {
-
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(new NotFoundException("Product not found")))
+        return findById(id)
                 .flatMap(product -> {
                     product.assignToBranch(branchId);
                     return repository.save(product);
                 });
     }
 
-    // =========================
-    // DELETE
-    // =========================
+    // DELETE (MEJORADO)
     public Mono<Void> delete(Long id) {
-        return repository.deleteById(id);
+        return findById(id)
+                .flatMap(product -> repository.deleteById(product.getId()));
     }
 }

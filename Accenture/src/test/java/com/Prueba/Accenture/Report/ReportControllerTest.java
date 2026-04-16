@@ -25,15 +25,17 @@ class ReportControllerTest {
     }
 
     @Test
-    void shouldReturnTopProducts() {
+    void shouldReturnTopProductsByFranchise() {
 
-        Mockito.when(service.getTopProductsByBranch())
+        Long franchiseId = 1L;
+
+        Mockito.when(service.getTopProductsByFranchise(franchiseId))
                 .thenReturn(Flux.just(
                         new TopProduct(1L, 1L, "Laptop", 100)
                 ));
 
         client.get()
-                .uri("/reports/top-products")
+                .uri("/reports/top-products/franchise/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()

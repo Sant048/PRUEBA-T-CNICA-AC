@@ -45,7 +45,7 @@ class ProductControllerTest {
                         }
                         """)
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isCreated() // 🔥 FIX
                 .expectBody()
                 .jsonPath("$.name").isEqualTo("Laptop");
     }
@@ -112,6 +112,6 @@ class ProductControllerTest {
         client.delete()
                 .uri("/products/1")
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus().isNoContent(); // 🔥 FIX
     }
 }

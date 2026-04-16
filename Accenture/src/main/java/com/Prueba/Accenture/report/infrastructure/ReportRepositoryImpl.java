@@ -16,23 +16,28 @@ public class ReportRepositoryImpl implements ReportRepository {
     }
 
     @Override
-    public Flux<TopProduct> findTopProductsByBranch() {
+    public Flux<TopProduct> findTopProductsByFranchise(Long franchiseId) {
 
         return client.sql("""
-                SELECT p.branch_id, p.id, p.name, p.stock
+                SELECT p.branch_id,
+                       p.id AS product_id,
+                       p.name AS product_name,
+                       p.stock
                 FROM product p
-                INNER JOIN (
-                    SELECT branch_id, MAX(stock) AS max_stock
-                    FROM product
-                    GROUP BY branch_id
-                ) grouped
-                ON p.branch_id = grouped.branch_id
-                AND p.stock = grouped.max_stock
+                WHERE p.branch_id IN (
+                    SELECT id FROM branch WHERE franchise_id = :franchiseId
+                )
+                AND p.stock = (
+                    SELECT MAX(p2.stock)
+                    FROM product p2
+                    WHERE p2.branch_id = p.branch_id
+                )
                 """)
+                .bind("franchiseId", franchiseId)
                 .map((row, meta) -> new TopProduct(
                         row.get("branch_id", Long.class),
-                        row.get("id", Long.class),
-                        row.get("name", String.class),
+                        row.get("product_id", Long.class),
+                        row.get("product_name", String.class),
                         row.get("stock", Integer.class)
                 ))
                 .all();

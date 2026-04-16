@@ -17,7 +17,7 @@ public class BranchService {
     }
 
     // =========================
-    // CREATE BRANCH
+    // CREATE
     // =========================
     public Mono<Branch> create(String name, Long franchiseId) {
 
@@ -29,10 +29,11 @@ public class BranchService {
     }
 
     // =========================
-    // FIND BY ID
+    // FIND BY ID (FIX CLAVE)
     // =========================
     public Mono<Branch> findById(Long id) {
-        return repository.findById(id);
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(new NotFoundException("Branch not found")));
     }
 
     // =========================
@@ -54,32 +55,15 @@ public class BranchService {
     // =========================
     public Mono<Branch> updateName(Long id, String newName) {
 
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(new NotFoundException("Branch not found")))
+        return findById(id)
                 .flatMap(branch -> {
                     branch.rename(newName);
                     return repository.save(branch);
                 });
     }
 
-    // =========================
-    // DELETE
-    // =========================
     public Mono<Void> delete(Long id) {
-        return repository.deleteById(id);
-    }
-
-
-    // =========================
-    // CHANGE FRANCHISE
-    // =========================
-    public Mono<Branch> changeFranchise(Long id, Long franchiseId) {
-
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(new NotFoundException("Branch not found")))
-                .flatMap(branch -> {
-                    branch.assignToFranchise(franchiseId);
-                    return repository.save(branch);
-                });
+        return findById(id)
+                .flatMap(branch -> repository.deleteById(branch.getId()));
     }
 }

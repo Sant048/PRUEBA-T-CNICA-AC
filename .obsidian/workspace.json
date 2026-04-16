@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Estructura de la Arquitectura"
+              "title": "Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes de Estructura de la Arquitectura"
+              "title": "Enlaces entrantes de Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Enlaces salientes de Estructura de la Arquitectura"
+              "title": "Enlaces salientes de Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de Estructura de la Arquitectura"
+              "title": "Esquema de Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
             }
           }
         ]
@@ -183,26 +183,38 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "ebf6751d4266885b",
+  "active": "1575b0b551a19306",
   "lastOpenFiles": [
-    "Accenture/target/test-classes/com/Prueba/Accenture/Report/ReportServiceTest.class",
-    "Accenture/target/test-classes/com/Prueba/Accenture/Report/ReportControllerTest.class",
-    "Accenture/target/test-classes/com/Prueba/Accenture/Report",
-    "Accenture/target/classes/com/Prueba/Accenture/shared/handler/GlobalExceptionHandler.class",
-    "Accenture/target/classes/com/Prueba/Accenture/shared/handler",
+    "Pasted image 20260415222723.png",
+    "Pasted image 20260415222709.png",
+    "Documentacion/Pruebas con posman/Pruebas con postman sucursales.md",
+    "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
+    "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
+    "Pasted image 20260415222245.png",
+    "Pasted image 20260415222225.png",
+    "Pasted image 20260415222145.png",
+    "Pasted image 20260415221712.png",
+    "Pasted image 20260415172257.png",
+    "Pasted image 20260415170639.png",
+    "Pasted image 20260415170602.png",
+    "Pasted image 20260415170500.png",
+    "Pasted image 20260415170354.png",
+    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/BranchEntity.class",
+    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/mapper/BranchMapper.class",
+    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/mapper",
+    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/BranchRepositoryImpl.class",
+    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure",
     "Accenture/target/classes/com/Prueba/Accenture/branch/application/BranchService.class",
     "Accenture/target/classes/com/Prueba/Accenture/branch/application",
-    "Accenture/target/classes/com/Prueba/Accenture/product/application/ProductService.class",
-    "Accenture/target/classes/com/Prueba/Accenture/product/application",
-    "Accenture/target/classes/com/Prueba/Accenture/report/application/ReportService.class",
-    "Accenture/target/classes/com/Prueba/Accenture/report/application",
+    "Documentacion/Pruebas con posman/Pruebas con postman franquicias.md",
+    "Documentacion/Pruebas con posman",
+    "Accenture/target/classes/com/Prueba/Accenture/franchise/infrastructure/FranchiseRepositoryImpl.class",
+    "Accenture/target/classes/com/Prueba/Accenture/franchise/application/FranchiseService.class",
+    "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
     "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
     "Accenture/HELP.md",
-    "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
     "Documentacion/Arquitectura/Componentes.md",
     "Documentacion/Arquitectura/Justificacion de la arquitectura.md",
-    "Documentacion/Base de datos/modelo relacional.md",
-    "Documentacion/img_doc/Pasted image 20260414194743.png",
-    "Documentacion/Sin título.md"
+    "Documentacion/Base de datos/modelo relacional.md"
   ]
 }
