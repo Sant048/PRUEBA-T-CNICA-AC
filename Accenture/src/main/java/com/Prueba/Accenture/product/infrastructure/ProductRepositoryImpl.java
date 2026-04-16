@@ -153,7 +153,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         return ((Number) value).intValue();
     }
 
-    // 🔥 FIX IMPORTANTE: evita "last inserted bug"
     private Mono<Product> findByUnique(String name, Long branchId) {
 
         return client.sql("""

@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:mysql://mysql:3306/accenture
+    username: root
+    password: root
+
+  sql:
+    init:
+      mode: always

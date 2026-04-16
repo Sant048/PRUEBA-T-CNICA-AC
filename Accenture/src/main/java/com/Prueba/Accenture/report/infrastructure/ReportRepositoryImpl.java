@@ -19,18 +19,23 @@ public class ReportRepositoryImpl implements ReportRepository {
     public Flux<TopProduct> findTopProductsByFranchise(Long franchiseId) {
 
         return client.sql("""
-                SELECT p.branch_id,
-                       p.id AS product_id,
-                       p.name AS product_name,
-                       p.stock
-                FROM product p
-                WHERE p.branch_id IN (
-                    SELECT id FROM branch WHERE franchise_id = :franchiseId
-                )
-                AND p.stock = (
-                    SELECT MAX(p2.stock)
-                    FROM product p2
-                    WHERE p2.branch_id = p.branch_id
+                
+                        SELECT branch_id, product_id, product_name, stock
+                                                    FROM (
+                                                        SELECT p.branch_id,
+                                                               p.id AS product_id,
+                                                               p.name AS product_name,
+                                                               p.stock,
+                                                               ROW_NUMBER() OVER (
+                                                                   PARTITION BY p.branch_id
+                                                                   ORDER BY p.stock DESC
+                                                               ) as rn
+                                                        FROM product p
+                                                        WHERE p.branch_id IN (
+                                                            SELECT id FROM branch WHERE franchise_id = :franchiseId
+                                                        )
+                                                    ) t
+                                                    WHERE rn = 1
                 )
                 """)
                 .bind("franchiseId", franchiseId)
