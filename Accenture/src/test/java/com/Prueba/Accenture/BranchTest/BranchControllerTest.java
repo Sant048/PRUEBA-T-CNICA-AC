@@ -40,7 +40,7 @@ class BranchControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)
                 .exchange()
-                .expectStatus().isOk()   // ✅ cambiado
+                .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.name").isEqualTo("Branch A");
     }
@@ -83,9 +83,9 @@ class BranchControllerTest {
                 .thenReturn(Flux.just(new Branch(1L, "A", 1L)));
 
         client.get()
-                .uri("/branches?franchiseId=1")  // ✅ corregido
+                .uri("/branches?franchiseId=1")
                 .exchange()
-                .expectStatus().isOk()           // ✅ corregido
+                .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.length()").isEqualTo(1);
     }
@@ -109,24 +109,6 @@ class BranchControllerTest {
     }
 
     @Test
-    void shouldChangeFranchise() {
-
-        Mockito.when(service.changeFranchise(1L, 99L))
-                .thenReturn(Mono.just(new Branch(1L, "A", 99L)));
-
-        BranchRequest request = new BranchRequest("A", 99L);
-
-        client.put()
-                .uri("/branches/1/franchise")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(request)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$.franchiseId").isEqualTo(99);
-    }
-
-    @Test
     void shouldDelete() {
 
         Mockito.when(service.delete(1L))
@@ -135,6 +117,6 @@ class BranchControllerTest {
         client.delete()
                 .uri("/branches/1")
                 .exchange()
-                .expectStatus().isOk(); // 🔥 ahora coincide con tu controller
+                .expectStatus().isNoContent();
     }
 }

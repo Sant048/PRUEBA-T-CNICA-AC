@@ -1,18 +1,20 @@
-package com.Prueba.Accenture.branch.interfaces.dto;
+package com.Prueba.Accenture.product.interfaces.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @Getter
 @AllArgsConstructor
-public class BranchRequest {
+public class ProductRequest {
 
     @NotBlank
     private String name;
 
     @NotNull
-    private Long franchiseId;
+    private Integer stock;
+
+    @NotNull
+    private Long branchId;
 }

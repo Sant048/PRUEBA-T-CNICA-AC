@@ -100,6 +100,6 @@ class FranchiseControllerTest {
         client.delete()
                 .uri("/franchises/1")
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus().isNoContent();
     }
 }

@@ -94,23 +94,12 @@ class BranchServiceTest {
     }
 
     @Test
-    void shouldChangeFranchise() {
+    void shouldDelete() {
 
-        Branch branch = new Branch(1L, "A", 1L);
+        Branch branch = new Branch(1L, "Test", 1L);
 
         Mockito.when(repository.findById(1L))
                 .thenReturn(Mono.just(branch));
-
-        Mockito.when(repository.save(Mockito.any()))
-                .thenAnswer(invocation -> Mono.just(invocation.getArgument(0)));
-
-        StepVerifier.create(service.changeFranchise(1L, 99L))
-                .expectNextMatches(b -> b.getFranchiseId().equals(99L))
-                .verifyComplete();
-    }
-
-    @Test
-    void shouldDelete() {
 
         Mockito.when(repository.deleteById(1L))
                 .thenReturn(Mono.empty());

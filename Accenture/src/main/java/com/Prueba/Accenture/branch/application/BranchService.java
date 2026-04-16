@@ -64,6 +64,7 @@ public class BranchService {
 
     public Mono<Void> delete(Long id) {
         return findById(id)
+                .switchIfEmpty(Mono.error(new RuntimeException("Branch not found")))
                 .flatMap(branch -> repository.deleteById(branch.getId()));
     }
 }

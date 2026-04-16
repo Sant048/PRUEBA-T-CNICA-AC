@@ -2,6 +2,10 @@ package com.Prueba.Accenture.product.interfaces;
 
 import com.Prueba.Accenture.product.application.ProductService;
 import com.Prueba.Accenture.product.domain.Product;
+import com.Prueba.Accenture.product.interfaces.dto.ProductDtoBr;
+import com.Prueba.Accenture.product.interfaces.dto.ProductDtoName;
+import com.Prueba.Accenture.product.interfaces.dto.ProductDtoStock;
+import com.Prueba.Accenture.product.interfaces.dto.ProductRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -48,21 +52,21 @@ public class ProductController {
     // UPDATE NAME
     @PutMapping("/{id}")
     public Mono<Product> updateName(@PathVariable Long id,
-                                    @Valid @RequestBody ProductRequest request) {
+                                    @Valid @RequestBody ProductDtoName request) {
         return service.updateName(id, request.getName());
     }
 
     // UPDATE STOCK
     @PutMapping("/{id}/stock")
     public Mono<Product> updateStock(@PathVariable Long id,
-                                     @Valid @RequestBody ProductRequest request) {
+                                     @Valid @RequestBody ProductDtoStock request) {
         return service.updateStock(id, request.getStock());
     }
 
     // CHANGE BRANCH
     @PutMapping("/{id}/branch")
     public Mono<Product> changeBranch(@PathVariable Long id,
-                                      @Valid @RequestBody ProductRequest request) {
+                                      @Valid @RequestBody ProductDtoBr request) {
         return service.changeBranch(id, request.getBranchId());
     }
 

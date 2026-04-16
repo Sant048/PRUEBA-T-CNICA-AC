@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
+              "title": "Pruebas con postman (productos)"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes de Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
+              "title": "Enlaces entrantes de Pruebas con postman (productos)"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Enlaces salientes de Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
+              "title": "Enlaces salientes de Pruebas con postman (productos)"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
+                "file": "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.)"
+              "title": "Esquema de Pruebas con postman (productos)"
             }
           }
         ]
@@ -183,12 +183,22 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "1575b0b551a19306",
+  "active": "ebf6751d4266885b",
   "lastOpenFiles": [
+    "Documentacion/Pruebas con posman/Pruebas con postman sucursales.md",
+    "Accenture/target/classes/com/Prueba/Accenture/product/interfaces/dto/ProductDtoBr.class",
+    "Accenture/target/classes/com/Prueba/Accenture/product/interfaces/dto/ProductDtoStock.class",
+    "Accenture/target/classes/com/Prueba/Accenture/product/interfaces/dto/ProductDtoName.class",
+    "Accenture/target/classes/com/Prueba/Accenture/branch/interfaces/dto/BranchDtoName.class",
+    "Accenture/src/main/java/com/Prueba/Accenture/product/interfaces/dto/ProductDtoBr.java",
+    "Accenture/src/main/java/com/Prueba/Accenture/product/interfaces/dto/ProductDtoStock.java",
+    "Accenture/src/main/java/com/Prueba/Accenture/product/interfaces/dto/ProductDtoName.java",
+    "Accenture/src/main/java/com/Prueba/Accenture/branch/interfaces/dto/BranchDtoName.java",
+    "Accenture/target/classes/com/Prueba/Accenture/product/interfaces/dto/ProductRequest.class",
+    "Accenture/target/classes/com/Prueba/Accenture/product/interfaces/dto",
+    "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
     "Pasted image 20260415222723.png",
     "Pasted image 20260415222709.png",
-    "Documentacion/Pruebas con posman/Pruebas con postman sucursales.md",
-    "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
     "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
     "Pasted image 20260415222245.png",
     "Pasted image 20260415222225.png",
@@ -198,18 +208,7 @@
     "Pasted image 20260415170639.png",
     "Pasted image 20260415170602.png",
     "Pasted image 20260415170500.png",
-    "Pasted image 20260415170354.png",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/BranchEntity.class",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/mapper/BranchMapper.class",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/mapper",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure/BranchRepositoryImpl.class",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/infrastructure",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/application/BranchService.class",
-    "Accenture/target/classes/com/Prueba/Accenture/branch/application",
     "Documentacion/Pruebas con posman/Pruebas con postman franquicias.md",
-    "Documentacion/Pruebas con posman",
-    "Accenture/target/classes/com/Prueba/Accenture/franchise/infrastructure/FranchiseRepositoryImpl.class",
-    "Accenture/target/classes/com/Prueba/Accenture/franchise/application/FranchiseService.class",
     "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
     "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
     "Accenture/HELP.md",

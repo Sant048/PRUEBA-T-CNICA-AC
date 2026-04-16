@@ -1,4 +1,4 @@
-package com.Prueba.Accenture.product.interfaces;
+package com.Prueba.Accenture.product.interfaces.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -7,14 +7,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ProductRequest {
+public class ProductDtoName {
 
     @NotBlank
     private String name;
-
-    @NotNull
-    private Integer stock;
-
-    @NotNull
-    private Long branchId;
 }

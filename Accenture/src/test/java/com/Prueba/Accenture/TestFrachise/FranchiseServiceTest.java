@@ -59,10 +59,15 @@ class FranchiseServiceTest {
 
     @Test
     void shouldUpdateName() {
+
         Franchise existing = new Franchise(1L, "Old");
 
         when(repository.findById(1L)).thenReturn(Mono.just(existing));
-        when(repository.save(any())).thenReturn(Mono.just(existing));
+
+        when(repository.save(any())).thenAnswer(invocation -> {
+            Franchise f = invocation.getArgument(0);
+            return Mono.just(f);
+        });
 
         Franchise result = service.updateName(1L, "New").block();
 

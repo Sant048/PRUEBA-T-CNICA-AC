@@ -45,7 +45,7 @@ class ProductControllerTest {
                         }
                         """)
                 .exchange()
-                .expectStatus().isCreated() // 🔥 FIX
+                .expectStatus().isCreated()
                 .expectBody()
                 .jsonPath("$.name").isEqualTo("Laptop");
     }
@@ -84,23 +84,36 @@ class ProductControllerTest {
     @Test
     void shouldUpdateStock() {
 
-        Product updated = new Product(1L, "Laptop", 50, 1L);
+        // Arrange
+        Long productId = 1L;
 
-        Mockito.when(service.updateStock(1L, 50))
+        Product updated = new Product(
+                productId,
+                "Laptop",
+                50,
+                1L
+        );
+
+        Mockito.when(service.updateStock(productId, 50))
                 .thenReturn(Mono.just(updated));
 
+        // Act & Assert
         client.put()
-                .uri("/products/1/stock")
+                .uri("/products/{id}/stock", productId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue("""
-                        {
-                          "stock": 50
-                        }
-                        """)
+                {
+                    "stock": 50
+                }
+            """)
                 .exchange()
                 .expectStatus().isOk()
+                .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
                 .expectBody()
-                .jsonPath("$.stock").isEqualTo(50);
+                .jsonPath("$.id").isEqualTo(1)
+                .jsonPath("$.name").isEqualTo("Laptop")
+                .jsonPath("$.stock").isEqualTo(50)
+                .jsonPath("$.branchId").isEqualTo(1);
     }
 
     @Test
@@ -112,6 +125,6 @@ class ProductControllerTest {
         client.delete()
                 .uri("/products/1")
                 .exchange()
-                .expectStatus().isNoContent(); // 🔥 FIX
+                .expectStatus().isNoContent();
     }
 }

@@ -3,6 +3,7 @@ package com.Prueba.Accenture.branch.interfaces;
 import com.Prueba.Accenture.branch.application.BranchService;
 import com.Prueba.Accenture.branch.domain.Branch;
 import com.Prueba.Accenture.branch.interfaces.dto.BranchRequest;
+import com.Prueba.Accenture.branch.interfaces.dto.BranchDtoName;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +53,7 @@ public class BranchController {
     @PutMapping("/{id}")
     public Mono<Branch> updateName(
             @PathVariable Long id,
-            @Valid @RequestBody BranchRequest request
+            @Valid @RequestBody BranchDtoName request
     ) {
         return service.updateName(id, request.getName());
     }
