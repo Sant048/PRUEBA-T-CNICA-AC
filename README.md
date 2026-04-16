@@ -1,1 +1,0 @@
-# PRUEBA-T-CNICA-AC

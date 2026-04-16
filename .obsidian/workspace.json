@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
+                "file": "Backend API franquicias — Spring WebFlux + R2DBC.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pruebas con postman (productos)"
+              "title": "Backend API franquicias — Spring WebFlux + R2DBC"
             }
           }
         ]
@@ -183,8 +183,13 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "ebf6751d4266885b",
+  "active": "1575b0b551a19306",
   "lastOpenFiles": [
+    "Documentacion/Arquitectura/Justificacion de la arquitectura.md",
+    "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
+    "Pruebas/Validacion con posman de la subida de la api mediante docker.md",
+    "Pasted image 20260416052604.png",
+    "Pruebas/Pruebas con posman/Pruebas con postman (productos).md",
     "Accenture/target/classes/com/Prueba/Accenture/report/infrastructure/ReportRepositoryImpl.class",
     "Accenture/target/classes/com/Prueba/Accenture/report/infrastructure",
     "Accenture/docker-compose.yml",
@@ -195,12 +200,10 @@
     "application.yml",
     "Dockerfile",
     "docker-compose.yml",
-    "Documentacion/Pruebas con posman/Pruebas con postman sucursales.md",
-    "Accenture/target/classes/com/Prueba/Accenture/product/interfaces/dto/ProductDtoBr.class",
-    "Documentacion/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
+    "Pruebas/Pruebas con posman/Pruebas con postman sucursales.md",
+    "Pruebas/Pruebas con posman/Pruebas con postman (producto que más stock tiene por sucursal para unafranquicia puntual.).md",
     "Documentacion/img_doc/Pasted image 20260415222723.png",
     "Documentacion/img_doc/Pasted image 20260415222709.png",
-    "Documentacion/Pruebas con posman/Pruebas con postman (productos).md",
     "Documentacion/img_doc/Pasted image 20260415222245.png",
     "Documentacion/img_doc/Pasted image 20260415222225.png",
     "Documentacion/img_doc/Pasted image 20260415222145.png",
@@ -208,13 +211,10 @@
     "Documentacion/img_doc/Pasted image 20260415172257.png",
     "Documentacion/img_doc/Pasted image 20260415170639.png",
     "Documentacion/img_doc/Pasted image 20260415170602.png",
-    "Documentacion/img_doc/Pasted image 20260415170500.png",
-    "Documentacion/Pruebas con posman/Pruebas con postman franquicias.md",
-    "Documentacion/Arquitectura/Estructura de la Arquitectura.md",
+    "Pruebas/Pruebas con posman/Pruebas con postman franquicias.md",
     "Documentacion/Definicion del Problema (API de Gestion de Franquicias).md",
     "Accenture/HELP.md",
     "Documentacion/Arquitectura/Componentes.md",
-    "Documentacion/Arquitectura/Justificacion de la arquitectura.md",
     "Documentacion/Base de datos/modelo relacional.md"
   ]
 }
